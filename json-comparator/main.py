@@ -11,34 +11,12 @@ except FileNotFoundError:
 pijar_auth_paths = []
 print("\n--- Pijar Auth Paths ---\n")
 
-itemPathGet = 0
-itemPathPost = 0
-itemPath = 0
-itemPathDelete = 0
-itemPathPut = 0
-itemPathPatch = 0
 for path, info in pijar_auth.get('paths', {}).items():
     for method, details in info.items():
         itemPath += 1
         # print(f"{method.upper()} {path}")
         pijar_auth_paths.append(f"{method.upper()} {path}")
-        if method.lower() == 'get':
-            itemPathGet += 1
-        elif method.lower() == 'post':
-            itemPathPost += 1
-        elif method.lower() == 'delete':
-            itemPathDelete += 1
-        elif method.lower() == 'put':
-            itemPathPut += 1
-        elif method.lower() == 'patch':
-            itemPathPatch += 1
 
-# print(f"Total paths found: {itemPath}")
-# print(f"GET methods: {itemPathGet}")
-# print(f"POST methods: {itemPathPost}")
-# print(f"DELETE methods: {itemPathDelete}")
-# print(f"PUT methods: {itemPathPut}")
-# print(f"PATCH methods: {itemPathPatch}")
 
 print("\n--- Krakend Endpoints ---\n")
 
