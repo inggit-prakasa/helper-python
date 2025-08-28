@@ -1,0 +1,356 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/api/v1/admins": {
+            "get": {
+                "parameters": [
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {}
+            },
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/admins/{id}": {
+            "get": {
+                "responses": {}
+            },
+            "delete": {
+                "responses": {}
+            },
+            "patch": {
+                "responses": {}
+            }
+        },
+        "/api/v1/change-password": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/deactivate": {
+            "delete": {
+                "responses": {}
+            }
+        },
+        "/api/v1/emergency-login": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/forgot-password": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/forgot-password-request": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/lenders": {
+            "get": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "reference_ids",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            },
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/lenders/member/{reference_id}": {
+            "put": {
+                "responses": {}
+            }
+        },
+        "/api/v1/lenders/members/{company_id}": {
+            "get": {
+                "responses": {}
+            }
+        },
+        "/api/v1/lenders/{reference_id}": {
+            "get": {
+                "responses": {}
+            }
+        },
+        "/api/v1/lenders/{user_id}": {
+            "put": {
+                "responses": {}
+            }
+        },
+        "/api/v1/login": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/logout": {
+            "get": {
+                "responses": {}
+            }
+        },
+        "/api/v1/otp/validate": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/otps/generate": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/otps/generate/sign": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/otps/generate/status-update": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/profile": {
+            "get": {
+                "responses": {}
+            }
+        },
+        "/api/v1/re-login": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/roles": {
+            "get": {
+                "responses": {}
+            },
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/roles/permissions": {
+            "get": {
+                "responses": {}
+            },
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/roles/permissions/:id": {
+            "patch": {
+                "responses": {}
+            }
+        },
+        "/api/v1/roles/permissions/access-control": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/roles/permissions/status": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/roles/{id}": {
+            "get": {
+                "responses": {}
+            },
+            "put": {
+                "responses": {}
+            }
+        },
+        "/api/v1/user": {
+            "put": {
+                "responses": {}
+            },
+            "post": {
+                "responses": {}
+            },
+            "delete": {
+                "responses": {}
+            }
+        },
+        "/api/v1/user/admins": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/user/by-role-id/{role_id}": {
+            "get": {
+                "responses": {}
+            }
+        },
+        "/api/v1/user/by-role/{role_id}": {
+            "get": {
+                "parameters": [
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/user/check-permission": {
+            "get": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "resource",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "user_id",
+                        "in": "query"
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/user/credit-analysts": {
+            "get": {
+                "responses": {}
+            }
+        },
+        "/api/v1/user/field-officers": {
+            "get": {
+                "responses": {}
+            }
+        },
+        "/api/v1/user/id/{user_id}": {
+            "get": {
+                "responses": {}
+            }
+        },
+        "/api/v1/user/kyc-event-id": {
+            "get": {
+                "responses": {}
+            }
+        },
+        "/api/v1/user/relationship-managers": {
+            "get": {
+                "responses": {}
+            }
+        },
+        "/api/v1/user/{role}": {
+            "get": {
+                "responses": {}
+            }
+        },
+        "/api/v1/users": {
+            "get": {
+                "responses": {}
+            }
+        },
+        "/api/v1/users/id/{user_id}": {
+            "get": {
+                "responses": {}
+            }
+        },
+        "/api/v2/forgot-password": {
+            "patch": {
+                "responses": {}
+            }
+        },
+        "/api/v2/login": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v2/logout": {
+            "get": {
+                "responses": {}
+            }
+        },
+        "/api/v2/otps/generate": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v2/otps/generate/back-office": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v2/profile": {
+            "get": {
+                "responses": {}
+            }
+        },
+        "/api/v2/re-login": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v2/roles": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v2/roles/{id}": {
+            "put": {
+                "responses": {}
+            },
+            "delete": {
+                "responses": {}
+            }
+        },
+        "/api/v2/user/by-role": {
+            "get": {
+                "responses": {}
+            }
+        },
+        "/api/v2/user/id/{user_id}": {
+            "get": {
+                "responses": {}
+            }
+        },
+        "/api/v3/login": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v3/login/back-office": {
+            "post": {
+                "responses": {}
+            }
+        }
+    }
+}
