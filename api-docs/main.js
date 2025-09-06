@@ -12,8 +12,8 @@ const docsDir = __dirname;
 const mergedSwaggerPath = path.join(docsDir, 'swagger.json');
 if (fs.existsSync(mergedSwaggerPath)) {
 	const swaggerDocument = require(mergedSwaggerPath);
-	app.use('/docs/merged', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-	console.log('Swagger UI available at /docs/merged');
+	app.use('', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+	console.log('Swagger UI available');
 } else {
 	console.error('swagger.json not found. Please run the merge script first.');
 }
