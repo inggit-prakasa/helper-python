@@ -1,0 +1,907 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/api/v1/admins": {
+            "get": {
+                "parameters": [
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.AdminResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/admins/{id}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.AdminResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "responses": {}
+            },
+            "patch": {
+                "responses": {}
+            }
+        },
+        "/api/v1/change-password": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/deactivate": {
+            "delete": {
+                "responses": {}
+            }
+        },
+        "/api/v1/emergency-login": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/forgot-password": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/forgot-password-request": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/lenders": {
+            "get": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "reference_ids",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.LenderResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/lenders/member/{reference_id}": {
+            "put": {
+                "responses": {}
+            }
+        },
+        "/api/v1/lenders/members/{company_id}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.BasicAdminResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/lenders/{reference_id}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.BasicAdminResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/lenders/{user_id}": {
+            "put": {
+                "responses": {}
+            }
+        },
+        "/api/v1/login": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/logout": {
+            "get": {
+                "responses": {}
+            }
+        },
+        "/api/v1/otp/validate": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.ValidateOTPResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/otps/generate": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/otps/generate/sign": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/otps/generate/status-update": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/profile": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.UserResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/re-login": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/roles": {
+            "get": {
+                "parameters": [
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "platform_reference_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "enum": [
+                                "admin",
+                                "other",
+                                "lender",
+                                "relationship_manager",
+                                "agent"
+                            ],
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv",
+                        "name": "platforms",
+                        "in": "query"
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "enum": [
+                                "active",
+                                "inactive"
+                            ],
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv",
+                        "name": "statuses",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.BasicRoleResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/roles/permissions": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.PermissionResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/roles/permissions/access-control": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/roles/permissions/status": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/roles/permissions/{id}": {
+            "patch": {
+                "responses": {}
+            }
+        },
+        "/api/v1/roles/{id}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.RoleResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "responses": {}
+            }
+        },
+        "/api/v1/user": {
+            "put": {
+                "responses": {}
+            },
+            "post": {
+                "responses": {}
+            },
+            "delete": {
+                "responses": {}
+            }
+        },
+        "/api/v1/user/admins": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v1/user/by-role-id/{role_id}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.BasicAdminResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user/by-role/{role_id}": {
+            "get": {
+                "parameters": [
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.AdminResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user/check-permission": {
+            "get": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "resource",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "user_id",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user/credit-analysts": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.BasicAdminResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user/field-officers": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.BasicAdminResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user/id/{user_id}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.UserDetailResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user/kyc-event-id": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.UserWithKycEventIDResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user/relationship-managers": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.RelationshipManagerResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/user/{role}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.BasicAdminResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.UserDetailResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/users/id/{user_id}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.UserDetailResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/forgot-password": {
+            "patch": {
+                "responses": {}
+            }
+        },
+        "/api/v2/login": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v2/logout": {
+            "get": {
+                "responses": {}
+            }
+        },
+        "/api/v2/otps/generate": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v2/otps/generate/back-office": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v2/profile": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.UserResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/re-login": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v2/roles": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v2/roles/{id}": {
+            "put": {
+                "responses": {}
+            },
+            "delete": {
+                "responses": {}
+            }
+        },
+        "/api/v2/user/by-role": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.UserDetailResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/user/id/{user_id}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.UserDetailResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v3/login": {
+            "post": {
+                "responses": {}
+            }
+        },
+        "/api/v3/login/back-office": {
+            "post": {
+                "responses": {}
+            }
+        }
+    },
+    "definitions": {
+        "presenters.AdminResponse": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "phone_number": {
+                    "type": "string"
+                },
+                "reference_id": {
+                    "type": "string"
+                },
+                "rm_detail": {
+                    "$ref": "#/definitions/presenters.RmDetailResponse"
+                },
+                "role": {
+                    "$ref": "#/definitions/presenters.RoleResponse"
+                }
+            }
+        },
+        "presenters.BasicAdminResponse": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "phone_number": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.BasicRoleResponse": {
+            "type": "object",
+            "properties": {
+                "display_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/queries.Status"
+                },
+                "total_user": {
+                    "type": "integer"
+                }
+            }
+        },
+        "presenters.LenderResponse": {
+            "type": "object",
+            "properties": {
+                "checked_pp": {
+                    "type": "integer"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "member_id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/presenters.RoleResponse"
+                }
+            }
+        },
+        "presenters.PermissionResponse": {
+            "type": "object",
+            "properties": {
+                "access_control": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "category": {
+                    "type": "string"
+                },
+                "child_permissions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/presenters.PermissionResponse"
+                    }
+                },
+                "description": {
+                    "type": "string"
+                },
+                "display_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "parent_id": {
+                    "type": "string"
+                },
+                "resource": {
+                    "type": "string"
+                },
+                "role_access_control": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "sequence": {
+                    "type": "integer"
+                },
+                "status": {
+                    "$ref": "#/definitions/queries.Status"
+                }
+            }
+        },
+        "presenters.RelationshipManagerResponse": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "freshsales_id": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "phone_number": {
+                    "type": "string"
+                },
+                "role": {
+                    "$ref": "#/definitions/presenters.RoleResponse"
+                }
+            }
+        },
+        "presenters.RmDetailResponse": {
+            "type": "object",
+            "properties": {
+                "freshsales_id": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "placement": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.RoleResponse": {
+            "type": "object",
+            "properties": {
+                "display_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "permissions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/presenters.PermissionResponse"
+                    }
+                },
+                "platform": {
+                    "$ref": "#/definitions/queries.PlatformType"
+                },
+                "status": {
+                    "$ref": "#/definitions/queries.Status"
+                },
+                "total_user": {
+                    "type": "integer"
+                }
+            }
+        },
+        "presenters.UserDetailResponse": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "is_subscribed": {
+                    "type": "boolean"
+                },
+                "is_verified": {
+                    "type": "boolean"
+                },
+                "kyc_event_id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "phone_number": {
+                    "type": "string"
+                },
+                "registered_at": {
+                    "type": "string"
+                },
+                "verified_at": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.UserResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.UserWithKycEventIDResponse": {
+            "type": "object",
+            "properties": {
+                "kyc_event_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.ValidateOTPResponse": {
+            "type": "object",
+            "properties": {
+                "valid": {
+                    "type": "boolean"
+                }
+            }
+        },
+        "queries.PlatformType": {
+            "type": "string",
+            "enum": [
+                "admin",
+                "other",
+                "lender",
+                "relationship_manager",
+                "agent"
+            ],
+            "x-enum-varnames": [
+                "PlatformTypeAdmin",
+                "PlatformTypeOther",
+                "PlatformTypeLender",
+                "PlatformTypeRelationshipManager",
+                "PlatformTypeAgent"
+            ]
+        },
+        "queries.Status": {
+            "type": "string",
+            "enum": [
+                "active",
+                "inactive"
+            ],
+            "x-enum-varnames": [
+                "StatusActive",
+                "StatusInactive"
+            ]
+        }
+    }
+}

@@ -1,0 +1,3809 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/api/v1/agreements/closing": {
+            "get": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "customer_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "heloc_id",
+                        "in": "query"
+                    },
+                    {
+                        "enum": [
+                            "origination",
+                            "referral"
+                        ],
+                        "type": "string",
+                        "name": "lender_type",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.AgreementLoanServicing"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/agreements/heloc_id/{heloc_id}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.AgreementResponse"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "parameters": [
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.UpsertAgreement"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.AgreementResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/agreements/heloc_id/{heloc_id}/confirm": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.AgreementResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/agreements/minimum-payment-calculation-type": {
+            "get": {
+                "responses": {}
+            }
+        },
+        "/api/v1/agreements/servicing": {
+            "get": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "customer_name",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "heloc_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv",
+                        "name": "lender_ids",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.AgreementLoanServicing"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/documents": {
+            "post": {
+                "parameters": [
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.CreateDocument"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.DocumentResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "document_type",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "name": "entity_id",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "name": "entity_type",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/documents/approved-ol/{offer_id}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.DocURLRepsonse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/documents/lender-borrow-pk-signed/{loan-id}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.DocumentWithPresignedUrlResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/documents/lender-pk-signed/{loan-id}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.DocumentWithPresignedUrlResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/documents/lender/preload": {
+            "post": {
+                "parameters": [
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.PreloadLenderDocument"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/integrations.Field"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/documents/lender/{offer_id}": {
+            "get": {
+                "responses": {}
+            }
+        },
+        "/api/v1/documents/loan-proposal/{offer_id}": {
+            "get": {
+                "parameters": [
+                    {
+                        "type": "boolean",
+                        "name": "is_regenerate",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "offerID",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.DocumentLoanProposalResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/documents/{id}": {
+            "delete": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/lender-preferences": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domains.LenderPreferenceRule"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "parameters": [
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.CreateLenderPreferenceRuleRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domains.LenderPreferenceRule"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "parameters": [
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.CreateLenderPreferenceRuleRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/domains.LenderPreferenceRule"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/lender-preferences/force": {
+            "post": {
+                "parameters": [
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/domains.MatchmakingResult"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/lender-preferences/{heloc_id}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domains.MatchmakingResult"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/lenders": {
+            "get": {
+                "parameters": [
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.BasicLenderResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "parameters": [
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.AddNewLender"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.LenderResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/lenders/combine-proposals/{heloc_id}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/lenders/statuses": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domains.LenderStatus"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/lenders/statuses/{id}": {
+            "patch": {
+                "parameters": [
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.UpdateLenderStatus"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/lenders/{id}": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.LenderResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "parameters": [
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.UpdateLender"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.LenderResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/lenders/{id}/addons": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domains.GetLenderAddons"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "parameters": [
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.UpdateLenderAddons"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/lenders/{id}/lender-interest": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domains.LenderInterest"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "parameters": [
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.LenderInterestRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/domains.LenderInterest"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/locations/cities/{cityID}/districts": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.DistrictResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/locations/districts/{districtID}/villages": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.VillageResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/locations/provinces": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.ProvinceResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/locations/provinces/{provinceID}/cities": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.CityResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/master-lender-interest-rates": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domains.MasterLenderInterestRate"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/members": {
+            "get": {
+                "parameters": [
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "name": "page",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.BasicMemberResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "parameters": [
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.AddNewMember"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.BasicMemberResponse"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "parameters": [
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.DeleteMember"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/members/me": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.MemberResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/members/{id}": {
+            "get": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Member ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.MemberResponse"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Member ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.UpdateMember"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.BasicMemberResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/members/{id}/disactive": {
+            "put": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Member ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/offers": {
+            "get": {
+                "parameters": [
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "approved_end_date",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "approved_start_date",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "customer_name",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "end_date",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "heloc_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "lenderID",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "lender_name",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "product",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "start_date",
+                        "in": "query"
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv",
+                        "name": "status_ids",
+                        "in": "query"
+                    }
+                ],
+                "responses": {}
+            },
+            "post": {
+                "parameters": [
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.AssignApplication"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.BasicOfferResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/offers/applications": {
+            "get": {
+                "parameters": [
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "approved_end_date",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "approved_start_date",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "customer_name",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "end_date",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "heloc_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "lender_id",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "start_date",
+                        "in": "query"
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv",
+                        "name": "status_ids",
+                        "in": "query"
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/offers/confirm": {
+            "post": {
+                "parameters": [
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.ConfirmOfferRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/offers/disbursement/{loan-id}": {
+            "get": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Loan ID",
+                        "name": "loan-id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/offers/finalized/{loan-id}": {
+            "get": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Loan ID",
+                        "name": "loan-id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/offers/heloc-id/{heloc_id}": {
+            "get": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "HELOC ID",
+                        "name": "heloc_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "boolean",
+                        "name": "with_match_rate",
+                        "in": "query"
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/offers/heloc-id/{heloc_id}/approved": {
+            "get": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "HELOC ID",
+                        "name": "heloc_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.BasicOfferResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/offers/insurance": {
+            "post": {
+                "parameters": [
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.SubmitOfferInsurance"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/offers/insurance-providers/{type_id}": {
+            "get": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Insurance Type ID",
+                        "name": "type_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/offers/insurance-types": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.InsuranceTypeResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/offers/originations": {
+            "get": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "name": "customer_name",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "number",
+                        "name": "interest_max",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "number",
+                        "name": "interest_min",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "lenderID",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "loan_id",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "name": "loan_tenor_max",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "loan_tenor_min",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "locations",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "number",
+                        "name": "plafon_max",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "number",
+                        "name": "plafon_min",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.OriginationResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/offers/sign": {
+            "post": {
+                "parameters": [
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.SignDocument"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/offers/signed/{loan-id}": {
+            "get": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Loan ID",
+                        "name": "loan-id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/offers/statuses": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.BasicOfferStatusResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/offers/syndication/statuses": {
+            "get": {
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.SyndicationDetailStatusResponse"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/offers/syndication/{syndication_id}": {
+            "patch": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Syndication ID",
+                        "name": "syndication_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.UpdateSyndicationStatus"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/offers/{id}": {
+            "get": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Offer ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/offers/{id}/lender-sign-credit-agreement/template": {
+            "get": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Offer ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/offers/{id}/logs": {
+            "get": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Offer ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.OfferStatusLog"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/offers/{id}/platform-sign-credit-agreement/template": {
+            "get": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Offer ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/offers/{id}/signed": {
+            "get": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Offer ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/offers/{lender-id}/{loan-id}": {
+            "get": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Lender ID",
+                        "name": "lender-id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Loan ID",
+                        "name": "loan-id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {}
+            }
+        },
+        "/api/v1/offers/{offer_id}/status": {
+            "patch": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Offer ID",
+                        "name": "offer_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.UpdateOfferStatusByIDBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.BasicOfferResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/products": {
+            "get": {
+                "parameters": [
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv",
+                        "name": "product_ids",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "repayment_type",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.BasicProductResponse"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "parameters": [
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.CreateProduct"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.BasicProductResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/products/{id}": {
+            "put": {
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Product ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.UpdateProduct"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.BasicProductResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v2/offers": {
+            "get": {
+                "parameters": [
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "approved_end_date",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "approved_start_date",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "customer_name",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "end_date",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "heloc_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "lender_id",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "lender_name",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 1,
+                        "type": "integer",
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "name": "product",
+                        "in": "query"
+                    },
+                    {
+                        "minimum": 0,
+                        "type": "integer",
+                        "name": "start_date",
+                        "in": "query"
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "csv",
+                        "name": "status_ids",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/presenters.OfferV2Response"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "parameters": [
+                    {
+                        "description": "body params",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.CreateOffer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/presenters.BasicOfferResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "domains.FeeConfig": {
+            "type": "object",
+            "properties": {
+                "origination": {
+                    "$ref": "#/definitions/domains.Origination"
+                },
+                "referral": {
+                    "$ref": "#/definitions/domains.Referral"
+                },
+                "syndication": {
+                    "$ref": "#/definitions/domains.Syndication"
+                }
+            }
+        },
+        "domains.GetLenderAddons": {
+            "type": "object",
+            "properties": {
+                "looker_url": {
+                    "type": "string"
+                }
+            }
+        },
+        "domains.LenderInterest": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "lender_id": {
+                    "type": "string"
+                },
+                "lender_interest": {
+                    "type": "number"
+                },
+                "master_lender_interest_rate": {
+                    "$ref": "#/definitions/domains.MasterLenderInterestRate"
+                },
+                "master_lender_interest_rate_id": {
+                    "type": "string"
+                },
+                "platform_interest": {
+                    "type": "number"
+                },
+                "updated_at": {
+                    "type": "integer"
+                }
+            }
+        },
+        "domains.LenderPreferenceRule": {
+            "type": "object",
+            "properties": {
+                "abl_matrix": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "id": {
+                    "type": "string"
+                },
+                "lender_id": {
+                    "type": "string"
+                },
+                "max_loan_facilities_amount_matrix": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "max_loan_facilities_count_matrix": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "non_abl_matrix": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "preference_rules": {
+                    "$ref": "#/definitions/domains.PreferenceRules"
+                },
+                "status": {
+                    "$ref": "#/definitions/queries.LenderPreferenceRuleStatus"
+                }
+            }
+        },
+        "domains.LenderStatus": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "display_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "is_include_in_permission": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "sequence": {
+                    "type": "integer"
+                },
+                "user_description": {
+                    "type": "string"
+                },
+                "user_display_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "domains.MasterLenderInterestRate": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "is_active": {
+                    "type": "boolean"
+                },
+                "updated_at": {
+                    "type": "integer"
+                },
+                "value": {
+                    "type": "integer"
+                }
+            }
+        },
+        "domains.MatchmakingRate": {
+            "type": "object",
+            "properties": {
+                "lender_id": {
+                    "type": "string"
+                },
+                "lender_name": {
+                    "type": "string"
+                },
+                "rank": {
+                    "type": "integer"
+                },
+                "rate": {
+                    "type": "number"
+                }
+            }
+        },
+        "domains.MatchmakingResult": {
+            "type": "object",
+            "properties": {
+                "heloc_id": {
+                    "type": "string"
+                },
+                "result": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domains.MatchmakingRate"
+                    }
+                }
+            }
+        },
+        "domains.Origination": {
+            "type": "object",
+            "properties": {
+                "origination_fee": {
+                    "type": "number"
+                },
+                "origination_rate": {
+                    "type": "number"
+                },
+                "servicing_fee": {
+                    "type": "number"
+                },
+                "servicing_rate": {
+                    "type": "number"
+                }
+            }
+        },
+        "domains.PreferenceRules": {
+            "type": "object",
+            "properties": {
+                "collateralized": {
+                    "type": "boolean"
+                },
+                "dbr": {
+                    "type": "number"
+                },
+                "higher_dbr": {
+                    "type": "number"
+                },
+                "ltv": {
+                    "type": "number"
+                },
+                "max_age_employee": {
+                    "type": "integer"
+                },
+                "max_age_entrepreneur": {
+                    "type": "integer"
+                },
+                "max_age_professional": {
+                    "type": "integer"
+                },
+                "max_facility": {
+                    "type": "integer"
+                },
+                "max_installment": {
+                    "type": "integer"
+                },
+                "min_age": {
+                    "type": "integer"
+                },
+                "min_facility": {
+                    "type": "integer"
+                },
+                "min_fixed_income": {
+                    "type": "integer"
+                },
+                "min_income_higher_dbr": {
+                    "type": "integer"
+                },
+                "min_irregular_income": {
+                    "type": "integer"
+                },
+                "min_working_time_fixed_income": {
+                    "type": "integer"
+                },
+                "min_working_time_irregular_income": {
+                    "type": "integer"
+                },
+                "property_value": {
+                    "type": "integer"
+                },
+                "retirement_age": {
+                    "type": "integer"
+                }
+            }
+        },
+        "domains.Referral": {
+            "type": "object",
+            "properties": {
+                "referral_fee": {
+                    "type": "number"
+                },
+                "referral_rate": {
+                    "type": "number"
+                }
+            }
+        },
+        "domains.Syndication": {
+            "type": "object",
+            "properties": {
+                "arranger_fee": {
+                    "type": "number"
+                },
+                "arranger_rate": {
+                    "type": "number"
+                },
+                "member_fee": {
+                    "type": "number"
+                },
+                "member_rate": {
+                    "type": "number"
+                }
+            }
+        },
+        "integrations.Field": {
+            "type": "object",
+            "properties": {
+                "label": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.AgreementLoanServicing": {
+            "type": "object",
+            "properties": {
+                "approved_date": {
+                    "type": "integer"
+                },
+                "customer_name": {
+                    "type": "string"
+                },
+                "dpd": {
+                    "type": "integer"
+                },
+                "heloc_id": {
+                    "type": "string"
+                },
+                "interest": {
+                    "type": "number"
+                },
+                "is_servicing_created": {
+                    "type": "boolean"
+                },
+                "last_withdrawal_status": {
+                    "type": "string"
+                },
+                "loan_principal": {
+                    "type": "integer"
+                },
+                "offer_id": {
+                    "type": "string"
+                },
+                "offer_limit": {
+                    "type": "number"
+                },
+                "paid_month": {
+                    "type": "integer"
+                },
+                "remaining_credit_limit": {
+                    "type": "integer"
+                },
+                "tenor": {
+                    "type": "integer"
+                }
+            }
+        },
+        "presenters.AgreementResponse": {
+            "type": "object",
+            "properties": {
+                "administration_fee": {
+                    "type": "integer"
+                },
+                "agreed_monthly_payment": {
+                    "type": "number"
+                },
+                "bank_transfer_fee": {
+                    "type": "integer"
+                },
+                "daily_penalty_rate": {
+                    "type": "number"
+                },
+                "debt_consolidation_amount": {
+                    "type": "integer"
+                },
+                "documents": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/presenters.BasicDocumentResponse"
+                    }
+                },
+                "due_date": {
+                    "type": "integer"
+                },
+                "duty_stamp": {
+                    "type": "integer"
+                },
+                "early_settlement_penalty_rate": {
+                    "type": "number"
+                },
+                "heloc_id": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "initial_disbursement": {
+                    "type": "integer"
+                },
+                "initial_disbursement_date": {
+                    "type": "integer"
+                },
+                "initial_fee_payment_option": {
+                    "type": "integer"
+                },
+                "initial_statement_date": {
+                    "type": "integer"
+                },
+                "interest": {
+                    "type": "number"
+                },
+                "is_document_confirmed": {
+                    "type": "boolean"
+                },
+                "life_insurance": {
+                    "type": "integer"
+                },
+                "minimum_payment_amount": {
+                    "type": "integer"
+                },
+                "minimum_payment_calculation": {
+                    "type": "integer"
+                },
+                "minimum_payment_rate": {
+                    "type": "number"
+                },
+                "monthly_statement_date": {
+                    "type": "integer"
+                },
+                "notary_cost": {
+                    "type": "integer"
+                },
+                "offer_id": {
+                    "type": "string"
+                },
+                "offer_limit": {
+                    "type": "number"
+                },
+                "origination_fee": {
+                    "type": "integer"
+                },
+                "origination_rate": {
+                    "type": "number"
+                },
+                "other_fee": {
+                    "type": "integer"
+                },
+                "product_option_id": {
+                    "type": "string"
+                },
+                "property_insurance": {
+                    "type": "integer"
+                },
+                "provisioning_fee": {
+                    "type": "integer"
+                },
+                "reference_number": {
+                    "type": "string"
+                },
+                "referral_fee": {
+                    "type": "integer"
+                },
+                "remaining_disbursement_amount": {
+                    "type": "integer"
+                },
+                "servicing_fee": {
+                    "type": "integer"
+                },
+                "servicing_rate": {
+                    "type": "number"
+                },
+                "start_date": {
+                    "type": "integer"
+                },
+                "tenor": {
+                    "type": "integer"
+                },
+                "transfer_amount": {
+                    "type": "integer"
+                },
+                "transfer_date": {
+                    "type": "integer"
+                }
+            }
+        },
+        "presenters.BasicDocumentResponse": {
+            "type": "object",
+            "properties": {
+                "document_type": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.BasicLenderResponse": {
+            "type": "object",
+            "properties": {
+                "city_name": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "lender_type": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "pic_email": {
+                    "type": "string"
+                },
+                "pic_name": {
+                    "type": "string"
+                },
+                "pic_phone": {
+                    "type": "string"
+                },
+                "status_name": {
+                    "type": "string"
+                },
+                "street": {
+                    "type": "string"
+                },
+                "village_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.BasicMemberResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "lender_id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.BasicOfferResponse": {
+            "type": "object",
+            "properties": {
+                "additional_docs_requested_at": {
+                    "type": "integer"
+                },
+                "approval_note": {
+                    "type": "string"
+                },
+                "approved_at": {
+                    "type": "integer"
+                },
+                "customer_name": {
+                    "type": "string"
+                },
+                "heloc_id": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "interest": {
+                    "type": "number"
+                },
+                "offer_limit": {
+                    "type": "number"
+                },
+                "offer_type": {
+                    "type": "string"
+                },
+                "reject_note": {
+                    "type": "string"
+                },
+                "status_id": {
+                    "type": "string"
+                },
+                "tenor": {
+                    "type": "integer"
+                },
+                "updated_at": {
+                    "type": "integer"
+                }
+            }
+        },
+        "presenters.BasicOfferStatusResponse": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "system_description": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.BasicProductResponse": {
+            "type": "object",
+            "properties": {
+                "credit_reduction_rate": {
+                    "type": "number"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "is_down_credit": {
+                    "type": "boolean"
+                },
+                "is_withdraw": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "repayment_type": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.CityResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "province_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.DistrictResponse": {
+            "type": "object",
+            "properties": {
+                "city_id": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.DocURLRepsonse": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.DocumentLoanProposalResponse": {
+            "type": "object",
+            "properties": {
+                "is_exist": {
+                    "type": "boolean"
+                },
+                "is_pending": {
+                    "type": "boolean"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.DocumentResponse": {
+            "type": "object",
+            "properties": {
+                "created_at": {
+                    "type": "string"
+                },
+                "document_type": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "reference_id": {
+                    "type": "string"
+                },
+                "reference_type": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.DocumentWithPresignedUrlResponse": {
+            "type": "object",
+            "properties": {
+                "document_type": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "presign_url": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.InsuranceTypeResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.LenderResponse": {
+            "type": "object",
+            "properties": {
+                "bank_account_name": {
+                    "type": "string"
+                },
+                "bank_account_number": {
+                    "type": "string"
+                },
+                "bank_admin_fee_account_name": {
+                    "type": "string"
+                },
+                "bank_admin_fee_account_number": {
+                    "type": "string"
+                },
+                "bank_admin_fee_bank_name": {
+                    "type": "string"
+                },
+                "bank_branch": {
+                    "type": "string"
+                },
+                "bank_name": {
+                    "type": "string"
+                },
+                "city": {
+                    "$ref": "#/definitions/presenters.CityResponse"
+                },
+                "city_name": {
+                    "type": "string"
+                },
+                "cooperation_agreement_date": {
+                    "type": "string"
+                },
+                "cooperation_agreement_number": {
+                    "type": "string"
+                },
+                "customs_identification_number": {
+                    "type": "string"
+                },
+                "district": {
+                    "$ref": "#/definitions/presenters.DistrictResponse"
+                },
+                "founding_date": {
+                    "type": "string"
+                },
+                "founding_place": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "initial_fee_payment_preference": {
+                    "type": "integer"
+                },
+                "last_deed_change_date": {
+                    "type": "string"
+                },
+                "last_deed_change_number": {
+                    "type": "string"
+                },
+                "lender_type": {
+                    "type": "string"
+                },
+                "lender_type_config": {
+                    "$ref": "#/definitions/domains.FeeConfig"
+                },
+                "lender_types": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "looker_url": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "origination_fee": {
+                    "type": "number"
+                },
+                "origination_rate": {
+                    "type": "number"
+                },
+                "payment_account_detail": {
+                    "$ref": "#/definitions/presenters.PaymentAccount"
+                },
+                "pic_email": {
+                    "type": "string"
+                },
+                "pic_name": {
+                    "type": "string"
+                },
+                "pic_phone": {
+                    "type": "string"
+                },
+                "province": {
+                    "$ref": "#/definitions/presenters.ProvinceResponse"
+                },
+                "referral_fee": {
+                    "type": "number"
+                },
+                "referral_rate": {
+                    "type": "number"
+                },
+                "servicing_fee": {
+                    "type": "number"
+                },
+                "servicing_rate": {
+                    "type": "number"
+                },
+                "status": {
+                    "$ref": "#/definitions/domains.LenderStatus"
+                },
+                "status_name": {
+                    "type": "string"
+                },
+                "street": {
+                    "type": "string"
+                },
+                "village": {
+                    "$ref": "#/definitions/presenters.VillageResponse"
+                },
+                "village_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.MemberResponse": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "lender": {
+                    "$ref": "#/definitions/presenters.LenderResponse"
+                },
+                "lender_id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "phone_number": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.OfferStatusLog": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "status": {
+                    "type": "string"
+                },
+                "status_change_date": {
+                    "type": "integer"
+                },
+                "user_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.OfferV2Response": {
+            "type": "object",
+            "properties": {
+                "approved_date": {
+                    "type": "string"
+                },
+                "customer_name": {
+                    "type": "string"
+                },
+                "heloc_id": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "offer_type": {
+                    "type": "string"
+                },
+                "recommended_loan_upper_limit_after_survey": {
+                    "type": "number"
+                },
+                "status": {
+                    "$ref": "#/definitions/presenters.Status"
+                },
+                "syndication_status": {
+                    "$ref": "#/definitions/presenters.Status"
+                },
+                "syndication_type": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.OriginationResponse": {
+            "type": "object",
+            "properties": {
+                "customer_name": {
+                    "type": "string"
+                },
+                "global_trx_id": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "interest": {
+                    "type": "number"
+                },
+                "loan_id": {
+                    "type": "string"
+                },
+                "loan_limit": {
+                    "type": "number"
+                },
+                "property_address_city_name": {
+                    "type": "string"
+                },
+                "property_address_district_name": {
+                    "type": "string"
+                },
+                "property_type": {
+                    "type": "string"
+                },
+                "status_description": {
+                    "type": "string"
+                },
+                "status_name": {
+                    "type": "string"
+                },
+                "tenure": {
+                    "type": "integer"
+                }
+            }
+        },
+        "presenters.PaymentAccount": {
+            "type": "object",
+            "properties": {
+                "is_token_registered": {
+                    "type": "boolean"
+                },
+                "payment_gateway_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.ProvinceResponse": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.Status": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.SyndicationDetailStatusResponse": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "slug": {
+                    "type": "string"
+                }
+            }
+        },
+        "presenters.VillageResponse": {
+            "type": "object",
+            "properties": {
+                "district_id": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "queries.LenderPreferenceRuleStatus": {
+            "type": "string",
+            "enum": [
+                "active",
+                "inactive"
+            ],
+            "x-enum-varnames": [
+                "LenderPreferenceRuleStatusActive",
+                "LenderPreferenceRuleStatusInactive"
+            ]
+        },
+        "requests.AcceptOfferBody": {
+            "type": "object",
+            "properties": {
+                "bypass_digital_signature": {
+                    "type": "boolean"
+                },
+                "offerID": {
+                    "type": "string"
+                },
+                "otp": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.AddNewLender": {
+            "type": "object",
+            "required": [
+                "customs_identification_number",
+                "name",
+                "pic_email",
+                "pic_name",
+                "pic_phone",
+                "street",
+                "village_id"
+            ],
+            "properties": {
+                "arranger_fee": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "arranger_rate": {
+                    "type": "number",
+                    "maximum": 1,
+                    "minimum": 0
+                },
+                "bank_account_name": {
+                    "type": "string"
+                },
+                "bank_account_number": {
+                    "type": "string"
+                },
+                "bank_admin_fee_account_name": {
+                    "type": "string"
+                },
+                "bank_admin_fee_account_number": {
+                    "type": "string"
+                },
+                "bank_admin_fee_bank_name": {
+                    "type": "string"
+                },
+                "bank_branch": {
+                    "type": "string"
+                },
+                "bank_name": {
+                    "type": "string"
+                },
+                "cooperation_agreement_date": {
+                    "type": "string"
+                },
+                "cooperation_agreement_number": {
+                    "type": "string"
+                },
+                "customs_identification_number": {
+                    "type": "string"
+                },
+                "founding_date": {
+                    "type": "string"
+                },
+                "founding_place": {
+                    "type": "string"
+                },
+                "initial_fee_payment_preference": {
+                    "type": "integer"
+                },
+                "is_active": {
+                    "type": "boolean"
+                },
+                "last_deed_change_date": {
+                    "type": "string"
+                },
+                "last_deed_change_number": {
+                    "type": "string"
+                },
+                "lender_type": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "member_fee": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "member_rate": {
+                    "type": "number",
+                    "maximum": 1,
+                    "minimum": 0
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 2
+                },
+                "origination_fee": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "origination_rate": {
+                    "type": "number",
+                    "maximum": 1,
+                    "minimum": 0
+                },
+                "pic_email": {
+                    "type": "string"
+                },
+                "pic_name": {
+                    "type": "string"
+                },
+                "pic_phone": {
+                    "type": "string",
+                    "maxLength": 16,
+                    "minLength": 8
+                },
+                "referral_fee": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "referral_rate": {
+                    "type": "number",
+                    "maximum": 1,
+                    "minimum": 0
+                },
+                "servicing_fee": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "servicing_rate": {
+                    "type": "number",
+                    "maximum": 1,
+                    "minimum": 0
+                },
+                "street": {
+                    "type": "string"
+                },
+                "village_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.AddNewMember": {
+            "type": "object",
+            "required": [
+                "email",
+                "lender_id",
+                "name",
+                "phone_number",
+                "role_id"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "lender_id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 2
+                },
+                "phone_number": {
+                    "type": "string",
+                    "maxLength": 16,
+                    "minLength": 8
+                },
+                "role_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.AssignApplication": {
+            "type": "object",
+            "required": [
+                "approved_at",
+                "customer_name",
+                "heloc_id",
+                "lender_ids",
+                "offer_type",
+                "participants",
+                "product_id"
+            ],
+            "properties": {
+                "approved_at": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "customer_name": {
+                    "type": "string"
+                },
+                "heloc_id": {
+                    "type": "string"
+                },
+                "lender_ids": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "offer_type": {
+                    "type": "string"
+                },
+                "participants": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/requests.Participant"
+                    }
+                },
+                "product_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.ConfirmOfferRequest": {
+            "type": "object",
+            "required": [
+                "offer_id"
+            ],
+            "properties": {
+                "is_confirm": {
+                    "type": "boolean"
+                },
+                "offer_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.CreateDocument": {
+            "type": "object",
+            "required": [
+                "document_type",
+                "entity_id",
+                "entity_type",
+                "title",
+                "url"
+            ],
+            "properties": {
+                "document_type": {
+                    "type": "string"
+                },
+                "entity_id": {
+                    "type": "string"
+                },
+                "entity_type": {
+                    "type": "string"
+                },
+                "lender_document_id": {
+                    "type": "string"
+                },
+                "payload": {
+                    "type": "object",
+                    "additionalProperties": true
+                },
+                "title": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.CreateLenderPreferenceRuleRequest": {
+            "type": "object",
+            "required": [
+                "abl_matrix",
+                "max_loan_facilities_amount_matrix",
+                "max_loan_facilities_count_matrix",
+                "non_abl_matrix",
+                "preference_rules",
+                "status"
+            ],
+            "properties": {
+                "abl_matrix": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "max_loan_facilities_amount_matrix": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "max_loan_facilities_count_matrix": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "non_abl_matrix": {
+                    "type": "array",
+                    "items": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                },
+                "preference_rules": {
+                    "$ref": "#/definitions/requests.PreferenceRules"
+                },
+                "status": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.CreateOffer": {
+            "type": "object",
+            "required": [
+                "customer_name",
+                "interest",
+                "lender_id",
+                "limit",
+                "loan_id",
+                "tenure"
+            ],
+            "properties": {
+                "customer_name": {
+                    "type": "string"
+                },
+                "global_trx_id": {
+                    "type": "string"
+                },
+                "interest": {
+                    "type": "number"
+                },
+                "lender_id": {
+                    "type": "string"
+                },
+                "limit": {
+                    "type": "integer"
+                },
+                "loan_id": {
+                    "type": "string"
+                },
+                "tenure": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requests.CreateProduct": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "credit_reduction_rate": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "description": {
+                    "type": "string"
+                },
+                "is_down_credit": {
+                    "type": "boolean"
+                },
+                "is_withdraw": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "repayment_type": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.DeleteMember": {
+            "type": "object",
+            "required": [
+                "member_id",
+                "role_id",
+                "user_id"
+            ],
+            "properties": {
+                "member_id": {
+                    "type": "string"
+                },
+                "role_id": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.LenderInterestRequest": {
+            "type": "object",
+            "required": [
+                "master_lender_interest_rate_id"
+            ],
+            "properties": {
+                "lender_id": {
+                    "type": "string"
+                },
+                "lender_interest": {
+                    "type": "integer"
+                },
+                "master_lender_interest_rate_id": {
+                    "type": "string"
+                },
+                "platform_interest": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requests.Participant": {
+            "type": "object",
+            "properties": {
+                "lender_distribution_rate": {
+                    "type": "integer"
+                },
+                "lender_id": {
+                    "type": "string"
+                },
+                "participant_type": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.PreferenceRules": {
+            "type": "object",
+            "properties": {
+                "collateralized": {
+                    "type": "boolean"
+                },
+                "dbr": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "higher_dbr": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "ltv": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "max_age_employee": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "max_age_entrepreneur": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "max_age_professional": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "max_facility": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "max_installment": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "min_age": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "min_facility": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "min_fixed_income": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "min_income_higher_dbr": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "min_irregular_income": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "min_working_time_fixed_income": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "min_working_time_irregular_income": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "property_value": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "retirement_age": {
+                    "type": "integer",
+                    "minimum": 0
+                }
+            }
+        },
+        "requests.PreloadLenderDocument": {
+            "type": "object",
+            "required": [
+                "lender_document_id",
+                "offer_id"
+            ],
+            "properties": {
+                "lender_document_id": {
+                    "type": "string"
+                },
+                "offer_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.SignDocument": {
+            "type": "object",
+            "required": [
+                "offer_id"
+            ],
+            "properties": {
+                "file": {
+                    "type": "string"
+                },
+                "offer_id": {
+                    "type": "string"
+                },
+                "otp": {
+                    "type": "string"
+                },
+                "signing_info": {
+                    "$ref": "#/definitions/requests.SigningInfo"
+                },
+                "sourceIP": {
+                    "type": "string"
+                },
+                "type": {
+                    "type": "string"
+                },
+                "url": {
+                    "type": "string"
+                },
+                "userAgent": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.SigningInfo": {
+            "type": "object",
+            "properties": {
+                "page": {
+                    "type": "integer"
+                },
+                "x": {
+                    "type": "integer"
+                },
+                "y": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requests.SubmitOfferInsurance": {
+            "type": "object",
+            "required": [
+                "insurance_product_id",
+                "offer_id",
+                "premium_cost"
+            ],
+            "properties": {
+                "insurance_product_id": {
+                    "type": "string"
+                },
+                "offer_id": {
+                    "type": "string"
+                },
+                "premium_cost": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requests.UpdateLender": {
+            "type": "object",
+            "required": [
+                "customs_identification_number",
+                "name",
+                "pic_email",
+                "pic_name",
+                "pic_phone",
+                "street",
+                "village_id"
+            ],
+            "properties": {
+                "arranger_fee": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "arranger_rate": {
+                    "type": "number",
+                    "maximum": 1,
+                    "minimum": 0
+                },
+                "bank_account_name": {
+                    "type": "string"
+                },
+                "bank_account_number": {
+                    "type": "string"
+                },
+                "bank_admin_fee_account_name": {
+                    "type": "string"
+                },
+                "bank_admin_fee_account_number": {
+                    "type": "string"
+                },
+                "bank_admin_fee_bank_name": {
+                    "type": "string"
+                },
+                "bank_branch": {
+                    "type": "string"
+                },
+                "bank_name": {
+                    "type": "string"
+                },
+                "cooperation_agreement_date": {
+                    "type": "string"
+                },
+                "cooperation_agreement_number": {
+                    "type": "string"
+                },
+                "customs_identification_number": {
+                    "type": "string"
+                },
+                "founding_date": {
+                    "type": "string"
+                },
+                "founding_place": {
+                    "type": "string"
+                },
+                "initial_fee_payment_preference": {
+                    "type": "integer"
+                },
+                "last_deed_change_date": {
+                    "type": "string"
+                },
+                "last_deed_change_number": {
+                    "type": "string"
+                },
+                "lender_type": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                },
+                "member_fee": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "member_rate": {
+                    "type": "number",
+                    "maximum": 1,
+                    "minimum": 0
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 2
+                },
+                "origination_fee": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "origination_rate": {
+                    "type": "number",
+                    "maximum": 1,
+                    "minimum": 0
+                },
+                "pic_email": {
+                    "type": "string"
+                },
+                "pic_name": {
+                    "type": "string"
+                },
+                "pic_phone": {
+                    "type": "string",
+                    "maxLength": 16,
+                    "minLength": 8
+                },
+                "referral_fee": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "referral_rate": {
+                    "type": "number",
+                    "maximum": 1,
+                    "minimum": 0
+                },
+                "servicing_fee": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "servicing_rate": {
+                    "type": "number",
+                    "maximum": 1,
+                    "minimum": 0
+                },
+                "status_name": {
+                    "type": "string"
+                },
+                "street": {
+                    "type": "string"
+                },
+                "village_id": {
+                    "type": "string",
+                    "minLength": 13
+                }
+            }
+        },
+        "requests.UpdateLenderAddons": {
+            "type": "object",
+            "required": [
+                "looker_url"
+            ],
+            "properties": {
+                "looker_url": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.UpdateLenderStatus": {
+            "type": "object",
+            "required": [
+                "status_name"
+            ],
+            "properties": {
+                "status_name": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.UpdateMember": {
+            "type": "object",
+            "required": [
+                "email",
+                "name",
+                "phone_number"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 2
+                },
+                "phone_number": {
+                    "type": "string",
+                    "maxLength": 16,
+                    "minLength": 8
+                }
+            }
+        },
+        "requests.UpdateOfferStatusByIDBody": {
+            "type": "object",
+            "required": [
+                "status_id"
+            ],
+            "properties": {
+                "additional_docs_note": {
+                    "type": "string",
+                    "maxLength": 280
+                },
+                "agreed_monthly_payment": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "approve_note": {
+                    "type": "string",
+                    "maxLength": 280
+                },
+                "credit_limit": {
+                    "type": "number"
+                },
+                "loan_amount": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "offerID": {
+                    "type": "string"
+                },
+                "reject_note": {
+                    "type": "string",
+                    "maxLength": 280
+                },
+                "start_date": {
+                    "type": "integer"
+                },
+                "status_id": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.UpdateProduct": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "credit_reduction_rate": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "description": {
+                    "type": "string"
+                },
+                "is_down_credit": {
+                    "type": "boolean"
+                },
+                "is_withdraw": {
+                    "type": "boolean"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "repayment_type": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.UpdateSyndicationStatus": {
+            "type": "object",
+            "required": [
+                "status_id"
+            ],
+            "properties": {
+                "note": {
+                    "type": "string",
+                    "maxLength": 280
+                },
+                "status_id": {
+                    "type": "string"
+                },
+                "syndicationID": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.UpsertAgreement": {
+            "type": "object",
+            "required": [
+                "daily_penalty_rate",
+                "due_date",
+                "early_settlement_penalty_rate",
+                "initial_disbursement",
+                "initial_disbursement_date",
+                "initial_statement_date",
+                "interest",
+                "minimum_payment_calculation",
+                "monthly_statement_date",
+                "offer_limit",
+                "tenor",
+                "transfer_date"
+            ],
+            "properties": {
+                "administration_fee": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "agreed_monthly_payment": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "bank_transfer_fee": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "daily_penalty_rate": {
+                    "type": "number"
+                },
+                "debt_consolidation_amount": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "due_date": {
+                    "type": "integer",
+                    "maximum": 31,
+                    "minimum": 1
+                },
+                "duty_stamp": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "early_settlement_penalty_rate": {
+                    "type": "number"
+                },
+                "initial_disbursement": {
+                    "type": "integer"
+                },
+                "initial_disbursement_date": {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "initial_fee_payment_option": {
+                    "type": "integer"
+                },
+                "initial_statement_date": {
+                    "type": "integer",
+                    "minimum": 1
+                },
+                "interest": {
+                    "type": "number"
+                },
+                "life_insurance": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "minimum_payment_amount": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "minimum_payment_calculation": {
+                    "type": "integer"
+                },
+                "minimum_payment_rate": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "monthly_statement_date": {
+                    "type": "integer",
+                    "maximum": 31,
+                    "minimum": 1
+                },
+                "notary_cost": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "offer_limit": {
+                    "type": "number"
+                },
+                "origination_fee": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "origination_rate": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "other_fee": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "property_insurance": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "provisioning_fee": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "reference_number": {
+                    "type": "string"
+                },
+                "referral_fee": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "remaining_disbursement_amount": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "servicing_fee": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "servicing_rate": {
+                    "type": "number",
+                    "minimum": 0
+                },
+                "start_date": {
+                    "type": "integer"
+                },
+                "tenor": {
+                    "type": "integer"
+                },
+                "transfer_amount": {
+                    "type": "integer",
+                    "minimum": 0
+                },
+                "transfer_date": {
+                    "type": "integer",
+                    "minimum": 1
+                }
+            }
+        }
+    }
+}
